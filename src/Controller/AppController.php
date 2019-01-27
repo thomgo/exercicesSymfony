@@ -7,13 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Service\SwearCleaner;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AppController extends AbstractController
 {
 
   /**
-   * @Route("/index")
+   * @Route("/index", name="app_home")
    * @Route("/")
   */
   public function home() {
@@ -38,11 +40,22 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/admin/article/add")
+     * @Route("/admin/article/add", name="admin_add")
+     * @IsGranted("ROLE_ADMIN")
     */
-    public function newArticle() {
-
-      return new Response("Voici l'admin");
+    public function newArticle(Request $request) {
+      $article = new Article();
+      $form = $this->createForm(ArticleType::class, $article);
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $article->setCreation(new \DateTime());
+        $article->setViewsNumber(0);
+        $entityManager->persist($article);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_home');
+      }
+      return $this->render("admin/addArticle.html.twig", ["form" => $form->createView()]);
 
      }
 }

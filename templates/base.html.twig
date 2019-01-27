@@ -12,6 +12,11 @@
         <div class="container">
           <h1 class="display-4">Je découvre Symfony</h1>
           <p class="lead">Parcourir les principes fondamentaux de Symfony au travers d'un mini blog</p>
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path("app_logout") }}" class="btn btn-warning float-right">Se déconnecter</a>
+          {% else %}
+            <a href="{{ path("app_login") }}" class="btn btn-success float-right">Se connecter</a>
+          {% endif %}
         </div>
       </div>
       <main class="container">
