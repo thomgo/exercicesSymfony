@@ -19,6 +19,12 @@ class Article
 
     /**
      * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 150,
+     *      minMessage = "Il faut au moins {{ limit }} lettres",
+     *      maxMessage = "Il ne faut pas plus de {{ limit }} lettres"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -36,6 +42,12 @@ class Article
 
     /**
      * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Il faut au moins {{ limit }} lettres",
+     *      maxMessage = "Il ne faut pas plus de {{ limit }} lettres"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $author;
