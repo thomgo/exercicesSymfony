@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block pageTitle %}Nos derniers articles{% endblock %}
+
+{% block body %}
+  {% for article in articles %}
+  <div class="card my-5">
+    <h5 class="card-header">{{ article.title }}</h5>
+    <div class="card-body">
+      <h5 class="card-title">Auteur : {{ article.author }}</h5>
+      <p>Publié le : {{ article.creation|date("d/m/Y") }}</p>
+      <p>Vues : {{ article.viewsNumber }} fois dans la catégorie : {{ article.category|capitalize }}</p>
+      <p class="card-text">{{ article.getShortedContent }} ...</p>
+      <a href="{{ path('single_show', {'id': article.id})}}" class="btn btn-primary">Je veux tout voir !</a>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

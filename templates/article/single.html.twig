@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block pageTitle %}{{ article.title }}{% endblock %}
+
+{% block body %}
+  <div class="my-5">
+    {{ article.content }}
+  </div>
+  <div class="my-5">
+    <span class="badge badge-secondary mx-3">Auteur : {{ article.author }}</span>
+    <span class="badge badge-secondary mx-3">Créé le : {{ article.creation|date("d/m/y") }}</span>
+    <span class="badge badge-secondary mx-3">Catégorie : {{ article.category }}</span>
+    <span class="badge badge-secondary mx-3">Vu : {{ article.viewsNumber }} fois</span>
+  </div>
+{% endblock %}
