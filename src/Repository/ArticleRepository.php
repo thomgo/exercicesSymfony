@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-// use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
